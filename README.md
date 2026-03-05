@@ -1,4 +1,70 @@
-## Hi there 👋
+<!DOCTYPE html>
+<html>
+<head>
+<title>PrivateView</title>
+<style>
+body{
+font-family: Arial;
+background:#0b0b0f;
+color:white;
+text-align:center;
+margin:0;
+}
+
+header{
+padding:50px;
+background:#121220;
+}
+
+section{
+padding:40px;
+}
+
+h1{
+font-size:50px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>PrivateView</h1>
+<p>Your screen. Only your eyes.</p>
+</header>
+
+<section>
+<h2>How It Works</h2>
+<p>
+PrivateView allows your computer screen to appear black to anyone nearby
+while the real screen is visible through PrivateView glasses.
+</p>
+</section>
+
+<section>
+<h2>PrivateView Devices</h2>
+<p>
+PrivateView ProBook (Laptop)<br>
+PrivateView Lens (Glasses)<br>
+PrivateView Tab (Tablet)<br>
+PrivateView Mobile (Phone)<br>
+PrivateView SecureDisplay (Monitor)<br>
+PrivateView Audio (Headphones)<br>
+PrivateView Beam (Projector)
+</p>
+</section>
+
+<section>
+<h2>Future of Privacy</h2>
+<p>
+PrivateView is designed to allow people to work anywhere without worrying
+about others seeing private information.
+</p>
+</section>
+
+</body>
+</html>
 
 <!--
 **privateview/privateview** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
