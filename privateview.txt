@@ -1,67 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>PrivateView</title>
-<style>
-body{
-font-family: Arial;
-background:#0b0b0f;
-color:white;
-text-align:center;
-margin:0;
-}
-
-header{
-padding:50px;
-background:#121220;
-}
-
-section{
-padding:40px;
-}
-
-h1{
-font-size:50px;
-}
-
-</style>
-</head>
-
-<body>
-
-<header>
-<h1>PrivateView</h1>
-<p>Your screen. Only your eyes.</p>
-</header>
-
-<section>
-<h2>How It Works</h2>
-<p>
-PrivateView allows your computer screen to appear black to anyone nearby
-while the real screen is visible through PrivateView glasses.
-</p>
-</section>
-
-<section>
-<h2>PrivateView Devices</h2>
-<p>
-PrivateView ProBook (Laptop)<br>
-PrivateView Lens (Glasses)<br>
-PrivateView Tab (Tablet)<br>
-PrivateView Mobile (Phone)<br>
-PrivateView SecureDisplay (Monitor)<br>
-PrivateView Audio (Headphones)<br>
-PrivateView Beam (Projector)
-</p>
-</section>
-
-<section>
-<h2>Future of Privacy</h2>
-<p>
-PrivateView is designed to allow people to work anywhere without worrying
-about others seeing private information.
-</p>
-</section>
-
-</body>
-</html>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PrivateView</title>
+  <style>
+    :root{
+      --bg:#0b0b0f;
+      --panel:#121220;
+      --panel2:#0f0f18;
+      --text:#ffffff;
+      --muted:rgba(255,255,255,.78);
+      --line:rgba(255,255,255,.12);
+      --accent:#2b6cff;
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(900px 500px at 20% 10%, rgba(43,108,255,.16), transparent 55%),
+        radial-gradient(700px 450px at 80% 15%, rgba(140,43,255,.10), transparent 55%),
+        var(--bg);
+      color:var(--text);
+    }
+    .container{
+      width:min(1050px, 92vw);
+      margin:0 auto;
+    }
+    header{
+      position:sticky;
+      top:0;
+      background: rgba(11,11,15,.60);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+      z-index:10;
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .logo-dot{
+      width:14px; height:14px;
+      border-radius:50%;
+      background:var(--accent);
+      box-shadow: 0 0 18px rgba(43,108,255,.55);
+    }
+    nav{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    nav a{
+      color:var(--muted);
+      text-decoration:none;
+      font
