@@ -8,8 +8,7 @@
 
 <style>
 
-:root,
-{
+:root{
 --bg-dark:#07070b;
 --bg-dark-2:#0b0b12;
 --text:#ffffff;
@@ -26,6 +25,7 @@
 }
 
 *{box-sizing:border-box;}
+
 body{
 margin:0;
 font-family:Arial,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
@@ -38,7 +38,7 @@ width:min(1100px,92vw);
 margin:auto;
 }
 
-/* NAVIGATION BAR */
+/* NAVIGATION */
 
 .nav{
 position:sticky;
@@ -67,10 +67,12 @@ font-weight:600;
 color:rgba(255,255,255,.85);
 text-decoration:none;
 font-size:14px;
+transition:transform .2s ease,color .2s ease;
 }
 
 .nav-links a:hover{
 color:white;
+transform:translateY(-2px);
 }
 
 .demo-btn{
@@ -81,18 +83,8 @@ border-radius:8px;
 text-decoration:none;
 font-weight:700;
 }
-.nav-links a{
-color:rgba(255,255,255,.85);
-text-decoration:none;
-font-size:14px;
-transition: transform .2s ease, color .2s ease;
-}
 
-.nav-links a:hover{
-color:white;
-transform: translateY(-2px);
-}
-/* HERO SECTION */
+/* HERO */
 
 .top{
 position:relative;
@@ -161,7 +153,7 @@ color:var(--muted);
 font-size:18px;
 }
 
-/* PULSING DIVIDER */
+/* NEON DIVIDER */
 
 .glow-divider{
 height:10px;
@@ -187,28 +179,179 @@ padding:40px 0 70px;
 margin-top:30px;
 }
 
+/* PRODUCT CARDS */
+
 .cards{
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:14px;
 }
 
-.card, .biz-card{
-background: rgba(255,255,255,.92);
-border: 1px solid rgba(12,18,32,.10);
-border-radius: var(--radius);
-padding: 18px;
-box-shadow: var(--shadow);
-transition: transform .25s ease, box-shadow .25s ease;
+.card,.biz-card{
+background:rgba(255,255,255,.92);
+border:1px solid rgba(12,18,32,.10);
+border-radius:var(--radius);
+padding:18px;
+box-shadow:var(--shadow);
+transition:transform .25s ease,box-shadow .25s ease;
 }
 
-/* hover pop effect */
-.card:hover, .biz-card:hover{
-transform: translateY(-8px) scale(1.02);
+/* HOVER POP EFFECT */
+
+.card:hover,.biz-card:hover{
+transform:translateY(-8px) scale(1.02);
 box-shadow:
 0 28px 65px rgba(0,0,0,.25),
 0 0 30px rgba(43,108,255,.25);
 }
 
-.mini
+.mini{
+color:var(--dark-muted);
+font-size:14px;
+}
 
+.pillrow{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-top:12px;
+}
+
+.pill{
+font-size:12px;
+padding:7px 10px;
+border-radius:999px;
+border:1px solid rgba(12,18,32,.12);
+background:rgba(43,108,255,.08);
+}
+
+/* BUSINESS GRID */
+
+.biz-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:14px;
+}
+
+.footer{
+margin-top:34px;
+padding-top:18px;
+border-top:1px solid rgba(12,18,32,.12);
+font-size:12px;
+text-align:center;
+color:rgba(12,18,32,.55);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV BAR -->
+
+<div class="nav">
+<div class="nav-inner">
+<div style="font-weight:800;">PrivateView</div>
+
+<div class="nav-links">
+<a href="#">Products</a>
+<a href="#">Enterprise</a>
+<a href="#">Security</a>
+<a href="#">About</a>
+<a class="demo-btn" href="#">Request Demo</a>
+</div>
+
+</div>
+</div>
+
+<!-- HERO -->
+
+<section class="top">
+<div class="container">
+<div class="hero">
+
+<div class="category">Enterprise Security</div>
+
+<img class="logo" src="logo.png" alt="PrivateView logo">
+
+<div class="brand">PrivateView</div>
+
+<p class="tagline">Your screen. Only your eyes.</p>
+
+</div>
+</div>
+</section>
+
+<div class="glow-divider"></div>
+
+<section class="bottom">
+<div class="container">
+
+<div class="section">
+<h2>How It Works</h2>
+<p>
+PrivateView allows workplace screens to appear black to everyone nearby while authorized employees see the real display through PrivateView glasses.
+</p>
+</div>
+
+<div class="section">
+<h2>Products</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>PrivateView SecureDisplay</h3>
+<p class="mini">Enterprise monitor only visible to authorized employees.</p>
+</div>
+
+<div class="card">
+<h3>PrivateView Lens</h3>
+<p class="mini">Discreet glasses that reveal the real screen privately.</p>
+</div>
+
+<div class="card">
+<h3>PrivateView ProBook</h3>
+<p class="mini">Matte black laptop with PrivateView Mode.</p>
+</div>
+
+</div>
+</div>
+
+<div class="section">
+<h2>Built for Business Security</h2>
+
+<div class="biz-grid">
+
+<div class="biz-card">
+<h3>Banks & Loan Offices</h3>
+<p class="mini">Protect financial information at customer-facing desks.</p>
+</div>
+
+<div class="biz-card">
+<h3>Hospitals & Clinics</h3>
+<p class="mini">Secure patient information at reception and workstations.</p>
+</div>
+
+<div class="biz-card">
+<h3>Hotels & Hospitality</h3>
+<p class="mini">Keep guest check-in information private.</p>
+</div>
+
+<div class="biz-card">
+<h3>Government Offices</h3>
+<p class="mini">Protect confidential work in shared environments.</p>
+</div>
+
+</div>
+</div>
+
+<div class="footer">
+© PrivateView Concept
+</div>
+
+</div>
+</section>
+
+</body>
+</html>
