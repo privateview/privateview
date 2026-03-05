@@ -81,10 +81,14 @@
     }
 
     /* Glowing divider line */
-    .glow-divider{
-      height: 10px;
-      background: linear-gradient(90deg, transparent 0%, rgba(43,108,255,.0) 10%, rgba(43,108,255,.9) 50%, rgba(43,108,255,.0) 90%, transparent 100%);
-      filter: drop-shadow(0 0 10px rgba(43,108,255,.85)) drop-shadow(0 0 26px rgba(43,108,255,.55));
+.glow-divider{
+height:10px;
+background:linear-gradient(90deg, transparent 0%, #2b6cff 50%, transparent 100%);
+box-shadow:
+0 0 10px #2b6cff,
+0 0 25px #2b6cff,
+0 0 40px rgba(43,108,255,.6);
+}
     }
 
     /* Bottom (about 3/4) */
