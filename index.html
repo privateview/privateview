@@ -1,357 +1,438 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PrivateView</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PrivateView v2</title>
 
-<style>
+  <style>
+    :root{
+      --bg-dark:#07070b;
+      --bg-dark-2:#0b0b12;
+      --text:#ffffff;
+      --muted:rgba(255,255,255,.78);
 
-:root{
---bg-dark:#07070b;
---bg-dark-2:#0b0b12;
---text:#ffffff;
---muted:rgba(255,255,255,.78);
+      --light:#f5f7fb;
+      --light-2:#ffffff;
+      --dark-text:#0c1220;
+      --dark-muted:rgba(12,18,32,.72);
 
---light:#f5f7fb;
---light-2:#ffffff;
---dark-text:#0c1220;
---dark-muted:rgba(12,18,32,.72);
+      --blue:#2b6cff;
+      --shadow: 0 18px 45px rgba(0,0,0,.20);
+      --radius: 18px;
+    }
 
---blue:#2b6cff;
---shadow:0 18px 45px rgba(0,0,0,.20);
---radius:18px;
-}
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: Arial, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--text);
+      background: var(--bg-dark);
+    }
 
-*{box-sizing:border-box;}
+    .container{
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+    }
 
-body{
-margin:0;
-font-family:Arial,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-background:var(--bg-dark);
-color:var(--text);
-}
+    /* NAVIGATION BAR */
+    .nav{
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(7,7,11,.72);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner{
+      width: min(1100px, 92vw);
+      margin: auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 14px 0;
+    }
+    .nav-brand{
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
+    .nav-links{
+      display:flex;
+      gap:22px;
+      font-weight:700;
+      align-items:center;
+    }
+    .nav-links a{
+      color: rgba(255,255,255,.85);
+      text-decoration:none;
+      font-size: 14px;
+      transition: transform .2s ease, color .2s ease;
+    }
+    .nav-links a:hover{
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+    .demo-btn{
+      background: var(--blue);
+      color: white !important;
+      padding: 9px 14px;
+      border-radius: 10px;
+      text-decoration:none;
+      font-weight: 900;
+      box-shadow: 0 0 18px rgba(43,108,255,.35);
+    }
+    .demo-btn:hover{
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 0 28px rgba(43,108,255,.55);
+    }
 
-.container{
-width:min(1100px,92vw);
-margin:auto;
-}
+    /* TOP (black ~1/4) */
+    .top{
+      position: relative;
+      min-height: 25vh;
+      background:
+        radial-gradient(900px 400px at 20% 20%, rgba(43,108,255,.18), transparent 55%),
+        radial-gradient(800px 450px at 80% 20%, rgba(43,108,255,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-dark-2) 100%);
+      display:flex;
+      align-items:center;
+      overflow:hidden;
+    }
 
-/* NAVIGATION */
+    /* FUTURE MOVING GRID */
+    .top::after{
+      content:"";
+      position:absolute;
+      inset:-200px;
+      background:
+        repeating-linear-gradient(90deg, rgba(43,108,255,.10) 0 1px, transparent 1px 44px),
+        repeating-linear-gradient(0deg, rgba(43,108,255,.07) 0 1px, transparent 1px 44px);
+      transform: rotate(8deg);
+      opacity: .35;
+      animation: gridMove 10s linear infinite;
+      pointer-events:none;
+    }
+    @keyframes gridMove{
+      from{ transform: translateY(0) rotate(8deg); }
+      to{ transform: translateY(140px) rotate(8deg); }
+    }
 
-.nav{
-position:sticky;
-top:0;
-z-index:1000;
-background:#07070b;
-border-bottom:1px solid rgba(255,255,255,.08);
-}
+    .hero{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      padding: 28px 0;
+      gap: 10px;
+      position: relative;
+      z-index: 2;
+    }
 
-.nav-inner{
-width:min(1100px,92vw);
-margin:auto;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:14px 0;
-}
+    .category{
+      display:inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.82);
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: .2px;
+    }
 
-.nav-links{
-display:flex;
-gap:22px;
-font-weight:600;
-}
+    .logo{
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 18px rgba(43,108,255,.25));
+    }
 
-.nav-links a{
-color:rgba(255,255,255,.85);
-text-decoration:none;
-font-size:14px;
-transition:transform .2s ease,color .2s ease;
-}
+    .brand{
+      font-size: clamp(34px, 4vw, 54px);
+      font-weight: 900;
+      letter-spacing: -0.8px;
+      margin: 6px 0 0;
+    }
 
-.nav-links a:hover{
-color:white;
-transform:translateY(-2px);
-}
+    .tagline{
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.45;
+      max-width: 68ch;
+    }
 
-.demo-btn{
-background:#2b6cff;
-color:white;
-padding:8px 14px;
-border-radius:8px;
-text-decoration:none;
-font-weight:700;
-}
+    /* PULSING NEON DIVIDER */
+    .glow-divider{
+      height: 10px;
+      background: linear-gradient(90deg, transparent 0%, var(--blue) 50%, transparent 100%);
+      box-shadow:
+        0 0 10px var(--blue),
+        0 0 25px var(--blue),
+        0 0 45px rgba(43,108,255,.7);
+      animation: pulseGlow 2.2s ease-in-out infinite;
+    }
+    @keyframes pulseGlow{
+      0%,100%{ filter: brightness(1); }
+      50%{ filter: brightness(1.4); }
+    }
 
-/* HERO */
+    /* BOTTOM (white ~3/4) */
+    .bottom{
+      min-height: 75vh;
+      background: linear-gradient(180deg, var(--light) 0%, var(--light-2) 100%);
+      color: var(--dark-text);
+      padding: 36px 0 70px;
+    }
 
-.top{
-position:relative;
-min-height:25vh;
-display:flex;
-align-items:center;
-background:
-radial-gradient(900px 400px at 20% 20%, rgba(43,108,255,.18), transparent 55%),
-radial-gradient(800px 450px at 80% 20%, rgba(43,108,255,.10), transparent 55%),
-linear-gradient(180deg,var(--bg-dark),var(--bg-dark-2));
-overflow:hidden;
-}
+    .section{ margin-top: 28px; }
+    .section h2{
+      margin: 0 0 10px;
+      font-size: 26px;
+      letter-spacing: -0.3px;
+    }
+    .section p{
+      margin: 0 0 18px;
+      color: var(--dark-muted);
+      line-height: 1.6;
+    }
 
-/* FUTURE GRID */
+    /* CARDS + HOVER POP */
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
 
-.top::after{
-content:"";
-position:absolute;
-inset:-200px;
-background:
-repeating-linear-gradient(90deg, rgba(43,108,255,.10) 0 1px, transparent 1px 40px),
-repeating-linear-gradient(0deg, rgba(43,108,255,.07) 0 1px, transparent 1px 40px);
-transform:rotate(8deg);
-opacity:.35;
-animation:gridMove 10s linear infinite;
-pointer-events:none;
-}
+    .card, .biz-card{
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(12,18,32,.10);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      position: relative;
+      overflow:hidden;
+    }
 
-@keyframes gridMove{
-from{transform:translateY(0) rotate(8deg);}
-to{transform:translateY(120px) rotate(8deg);}
-}
+    .card::before, .biz-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(420px 140px at 20% 0%, rgba(43,108,255,.14), transparent 60%);
+      pointer-events:none;
+    }
 
-.hero{
-display:flex;
-flex-direction:column;
-align-items:center;
-text-align:center;
-padding:26px 0;
-gap:10px;
-}
+    .card:hover, .biz-card:hover{
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(43,108,255,.35);
+      box-shadow:
+        0 28px 65px rgba(0,0,0,.25),
+        0 0 30px rgba(43,108,255,.25);
+    }
 
-.category{
-padding:8px 12px;
-border-radius:999px;
-border:1px solid rgba(255,255,255,.16);
-background:rgba(255,255,255,.08);
-font-weight:700;
-font-size:13px;
-}
+    .card h3, .biz-card h3{
+      margin: 0 0 6px;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+    }
 
-.logo{
-width:120px;
-height:120px;
-object-fit:contain;
-box-shadow:0 0 30px rgba(43,108,255,.18);
-}
+    .mini{
+      margin: 0;
+      color: var(--dark-muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
 
-.brand{
-font-size:clamp(34px,4vw,54px);
-font-weight:900;
-}
+    .pillrow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top: 12px;
+    }
 
-.tagline{
-color:var(--muted);
-font-size:18px;
-}
+    .pill{
+      font-size: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(12,18,32,.12);
+      background: rgba(43,108,255,.08);
+      color: rgba(12,18,32,.85);
+    }
 
-/* NEON DIVIDER */
+    /* BUSINESS GRID */
+    .biz-grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
 
-.glow-divider{
-height:10px;
-background:linear-gradient(90deg,transparent 0%,var(--blue) 50%,transparent 100%);
-box-shadow:0 0 10px var(--blue),0 0 25px var(--blue),0 0 45px rgba(43,108,255,.7);
-animation:pulseGlow 2.2s ease-in-out infinite;
-}
+    .footer{
+      margin-top: 34px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(12,18,32,.12);
+      color: rgba(12,18,32,.55);
+      font-size: 12px;
+      text-align:center;
+    }
 
-@keyframes pulseGlow{
-0%,100%{filter:brightness(1);}
-50%{filter:brightness(1.4);}
-}
-
-/* WHITE SECTION */
-
-.bottom{
-background:linear-gradient(180deg,var(--light),var(--light-2));
-color:var(--dark-text);
-padding:40px 0 70px;
-}
-
-.section{
-margin-top:30px;
-}
-
-/* PRODUCT CARDS */
-
-.cards{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:14px;
-}
-
-.card,.biz-card{
-background:rgba(255,255,255,.92);
-border:1px solid rgba(12,18,32,.10);
-border-radius:var(--radius);
-padding:18px;
-box-shadow:var(--shadow);
-transition:transform .25s ease,box-shadow .25s ease;
-}
-
-/* HOVER POP EFFECT */
-
-.card:hover,.biz-card:hover{
-transform:translateY(-8px) scale(1.02);
-box-shadow:
-0 28px 65px rgba(0,0,0,.25),
-0 0 30px rgba(43,108,255,.25);
-}
-
-.mini{
-color:var(--dark-muted);
-font-size:14px;
-}
-
-.pillrow{
-display:flex;
-flex-wrap:wrap;
-gap:8px;
-margin-top:12px;
-}
-
-.pill{
-font-size:12px;
-padding:7px 10px;
-border-radius:999px;
-border:1px solid rgba(12,18,32,.12);
-background:rgba(43,108,255,.08);
-}
-
-/* BUSINESS GRID */
-
-.biz-grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:14px;
-}
-
-.footer{
-margin-top:34px;
-padding-top:18px;
-border-top:1px solid rgba(12,18,32,.12);
-font-size:12px;
-text-align:center;
-color:rgba(12,18,32,.55);
-}
-
-</style>
-
+    @media (max-width: 980px){
+      .cards{ grid-template-columns: repeat(2, 1fr); }
+      .biz-grid{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 620px){
+      .cards{ grid-template-columns: 1fr; }
+      .logo{ width: 104px; height: 104px; }
+      .nav-links{ gap: 14px; }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- NAV BAR -->
+  <!-- NAVIGATION -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="nav-brand">PrivateView</div>
+      <div class="nav-links">
+        <a href="#products">Products</a>
+        <a href="#enterprise">Enterprise</a>
+        <a href="#security">Security</a>
+        <a href="#about">About</a>
+        <a class="demo-btn" href="#demo">Request Demo</a>
+      </div>
+    </div>
+  </div>
 
-<div class="nav">
-<div class="nav-inner">
-<div style="font-weight:800;">PrivateView</div>
+  <!-- TOP (black) -->
+  <section class="top" id="home">
+    <div class="container">
+      <div class="hero">
+        <div class="category">Enterprise Security</div>
+        <img class="logo" src="logo.png" alt="PrivateView logo">
+        <div class="brand">PrivateView</div>
+        <p class="tagline">Your screen. Only your eyes.</p>
+      </div>
+    </div>
+  </section>
 
-<div class="nav-links">
-<a href="#">Products</a>
-<a href="#">Enterprise</a>
-<a href="#">Security</a>
-<a href="#">About</a>
-<a class="demo-btn" href="#">Request Demo</a>
-</div>
+  <!-- GLOWING BLUE LINE -->
+  <div class="glow-divider"></div>
 
-</div>
-</div>
+  <!-- BOTTOM (white) -->
+  <section class="bottom">
+    <div class="container">
 
-<!-- HERO -->
+      <div class="section" id="security">
+        <h2>How It Works</h2>
+        <p>
+          PrivateView lets workplace screens appear “black-screen” to everyone nearby while authorized employees see the real
+          workspace through PrivateView Lens — reducing shoulder surfing and protecting sensitive information.
+        </p>
+      </div>
 
-<section class="top">
-<div class="container">
-<div class="hero">
+      <div class="section" id="products">
+        <h2>Products</h2>
+        <p>A connected ecosystem built around privacy-first viewing — built for secure workplaces.</p>
 
-<div class="category">Enterprise Security</div>
+        <div class="cards">
+          <div class="card">
+            <h3>PrivateView SecureDisplay</h3>
+            <p class="mini">Enterprise monitor only visible to authorized employees.</p>
+            <div class="pillrow">
+              <span class="pill">Employee-only view</span>
+              <span class="pill">Front desk safe</span>
+              <span class="pill">Enterprise</span>
+            </div>
+          </div>
 
-<img class="logo" src="logo.png" alt="PrivateView logo">
+          <div class="card">
+            <h3>PrivateView Lens</h3>
+            <p class="mini">Discreet glasses that reveal the real screen privately.</p>
+            <div class="pillrow">
+              <span class="pill">Secure pairing</span>
+              <span class="pill">Comfort-first</span>
+              <span class="pill">Authorized access</span>
+            </div>
+          </div>
 
-<div class="brand">PrivateView</div>
+          <div class="card">
+            <h3>PrivateView ProBook</h3>
+            <p class="mini">Matte black laptop with PrivateView Mode.</p>
+            <div class="pillrow">
+              <span class="pill">PrivateView Key</span>
+              <span class="pill">Black-screen mode</span>
+              <span class="pill">Blue indicator</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<p class="tagline">Your screen. Only your eyes.</p>
+      <div class="section" id="enterprise">
+        <h2>Built for Business Security</h2>
+        <p>
+          Designed for workplaces that handle sensitive information — customer service desks, reception areas, and shared offices.
+        </p>
 
-</div>
-</div>
-</section>
+        <div class="biz-grid">
+          <div class="biz-card">
+            <h3>Banks & Loan Offices</h3>
+            <p class="mini">Protect account details, credit reports, and customer information.</p>
+            <div class="pillrow">
+              <span class="pill">Customer privacy</span>
+              <span class="pill">Front desk safe</span>
+            </div>
+          </div>
 
-<div class="glow-divider"></div>
+          <div class="biz-card">
+            <h3>Hospitals & Clinics</h3>
+            <p class="mini">Keep patient information private at reception and nursing stations.</p>
+            <div class="pillrow">
+              <span class="pill">Sensitive records</span>
+              <span class="pill">Authorized viewing</span>
+            </div>
+          </div>
 
-<section class="bottom">
-<div class="container">
+          <div class="biz-card">
+            <h3>Hotels & Hospitality</h3>
+            <p class="mini">Secure guest check-in screens and billing details.</p>
+            <div class="pillrow">
+              <span class="pill">Guest data</span>
+              <span class="pill">Check-in privacy</span>
+            </div>
+          </div>
 
-<div class="section">
-<h2>How It Works</h2>
-<p>
-PrivateView allows workplace screens to appear black to everyone nearby while authorized employees see the real display through PrivateView glasses.
-</p>
-</div>
+          <div class="biz-card">
+            <h3>Government & Secure Offices</h3>
+            <p class="mini">Support confidential workflows in shared environments.</p>
+            <div class="pillrow">
+              <span class="pill">Restricted info</span>
+              <span class="pill">Workplace security</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<div class="section">
-<h2>Products</h2>
+      <div class="section" id="about">
+        <h2>Why It Matters</h2>
+        <p>
+          PrivateView helps protect sensitive information in real workplaces — customer-facing environments where privacy matters most.
+        </p>
+      </div>
 
-<div class="cards">
+      <div class="section" id="demo">
+        <h2>Request a Demo</h2>
+        <p class="mini">Interested in PrivateView for your workplace? (Concept) Add a contact form here later.</p>
+      </div>
 
-<div class="card">
-<h3>PrivateView SecureDisplay</h3>
-<p class="mini">Enterprise monitor only visible to authorized employees.</p>
-</div>
+      <div class="footer">
+        © PrivateView (concept). Enterprise privacy-first viewing.
+      </div>
 
-<div class="card">
-<h3>PrivateView Lens</h3>
-<p class="mini">Discreet glasses that reveal the real screen privately.</p>
-</div>
-
-<div class="card">
-<h3>PrivateView ProBook</h3>
-<p class="mini">Matte black laptop with PrivateView Mode.</p>
-</div>
-
-</div>
-</div>
-
-<div class="section">
-<h2>Built for Business Security</h2>
-
-<div class="biz-grid">
-
-<div class="biz-card">
-<h3>Banks & Loan Offices</h3>
-<p class="mini">Protect financial information at customer-facing desks.</p>
-</div>
-
-<div class="biz-card">
-<h3>Hospitals & Clinics</h3>
-<p class="mini">Secure patient information at reception and workstations.</p>
-</div>
-
-<div class="biz-card">
-<h3>Hotels & Hospitality</h3>
-<p class="mini">Keep guest check-in information private.</p>
-</div>
-
-<div class="biz-card">
-<h3>Government Offices</h3>
-<p class="mini">Protect confidential work in shared environments.</p>
-</div>
-
-</div>
-</div>
-
-<div class="footer">
-© PrivateView Concept
-</div>
-
-</div>
-</section>
+    </div>
+  </section>
 
 </body>
 </html>
