@@ -183,19 +183,21 @@ grid-template-columns:repeat(3,1fr);
 gap:14px;
 }
 
-.card,.biz-card{
-background:rgba(255,255,255,.92);
-border:1px solid rgba(12,18,32,.10);
-border-radius:var(--radius);
-padding:18px;
-box-shadow:var(--shadow);
-transition:.2s;
+.card, .biz-card{
+background: rgba(255,255,255,.92);
+border: 1px solid rgba(12,18,32,.10);
+border-radius: var(--radius);
+padding: 18px;
+box-shadow: var(--shadow);
+transition: transform .25s ease, box-shadow .25s ease;
 }
 
-.card:hover,.biz-card:hover{
-transform:translateY(-4px);
-border-color:rgba(43,108,255,.35);
-box-shadow:0 22px 55px rgba(0,0,0,.22),0 0 26px rgba(43,108,255,.18);
+/* hover pop effect */
+.card:hover, .biz-card:hover{
+transform: translateY(-8px) scale(1.02);
+box-shadow:
+0 28px 65px rgba(0,0,0,.25),
+0 0 30px rgba(43,108,255,.25);
 }
 
 .mini
